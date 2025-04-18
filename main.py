@@ -35,6 +35,7 @@ async def whatsapp_webhook(Body: str = Form(...), From: str = Form(...)):
     print(f"🤖 GPT reply: {reply}")
 
     # Send reply to WhatsApp user via Twilio
+    from_number = twilio_number if twilio_number.startswith("whatsapp:") else f"whatsapp:{twilio_number}"
     to_number = From if From.startswith("whatsapp:") else f"whatsapp:{From}"
     
     twilio_client.messages.create(
